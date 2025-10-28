@@ -23,12 +23,14 @@ Python 專案，用於自動爬取松山文創園區網站展覽資訊，透過 
 程式會自動從 Secrets 中讀取設定，不會在程式中顯示或記錄金鑰。
 
 ## 專案結構
+```tree
 .
 ├── tibame_songshanccpark_exhibition.ipynb    # 主程式 (Colab)
 ├── /drive/MyDrive/tibame_proj/               # 預設輸出資料夾
 │   ├── YYYY_MM_DD_images/                    # 下載圖片
 │   └── exhibition_info_YYYY_MM_DD.json       # 結構化資料
 └── README.md
+```
 
 ## 主要流程
 1. 抓取展覽列表與詳細頁面
