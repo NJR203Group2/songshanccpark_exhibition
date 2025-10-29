@@ -92,7 +92,7 @@ def baseinfo(pageurl, headers) -> list[dict]:
                              imgurl,
                              save_dir = str(datetime.strftime(datetime.today(), '%Y_%m_%d')) + '_images/' + f'{infolist['name']}', # 新建子資料匣，加入展覽名稱做資料匣名稱
                              headers = headers,
-                             img_nm = urlparse(imgurl).path.split('/')[-1].split('.')[0]))
+                             img_nm = pp(urlparse(imgurl)).stem))
             infolist['pageimgurl'][idx] = save_inner if save_inner else None # 置換外部網址成儲存的內部網址
         print(f'[{ccnt + 1}/{len(pageurl)}] {infolist['name']}') # 存進 MongoDB，圖片已下載 {save}
         baseans.append(infolist)
