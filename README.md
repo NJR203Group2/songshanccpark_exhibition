@@ -5,7 +5,7 @@ Python 專案，用於自動爬取松山文創園區網站展覽資訊，透過 
 1. 爬取展覽官網資訊（標題、日期、地點、描述、圖片）
 2. 進行圖片文字辨識（EasyOCR）
 3. 呼叫 Gemini API 進行結構化資料提取（活動日期、票價、地點、連結）
-4. 結果輸出為 JSON，儲存於 Google Drive 或本地端
+4. 結果輸出為 csv，儲存於 Google Drive 或本地端
 
 ## 系統需求
 * **環境**：Google Colab
@@ -37,7 +37,7 @@ Python 專案，用於自動爬取松山文創園區網站展覽資訊，透過 
 2. 下載文字與圖片內容
 3. 使用 EasyOCR 辨識圖片文字
 4. 使用 Gemini API 提取活動資訊
-5. 匯出 JSON 結果
+5. 匯出 CSV 結果
 
 ### 錯誤處理
 1. API 重試與延遲機制
@@ -51,20 +51,29 @@ Python 專案，用於自動爬取松山文創園區網站展覽資訊，透過 
     * 清除所有輸出（Runtime → Restart & Clear Output）。
     * 可另外輸出結果檔供展示。
 
-## JSON 輸出格式
-```json
-[
-  {
-    "name": "展覽名稱",
-    "strt_dt": "2025-10-01",
-    "end_dt": "2025-10-31",
-    "loc": "松山文創園區",
-    "wrktime": "10:00 - 18:00",
-    "price": "免費入場",
-    "note": "無資訊",
-    "pageurl": "[https://www.songshanculturalpark.org/](https://www.songshanculturalpark.org/)..."
-  }
-]
+## CSV 輸出格式
+
+CSV 檔案欄位範例說明如下。
+| 欄位名稱 (Header) | 範例值 (第一筆資料) | 範例值 (第二筆資料) |
+| :--- | :--- | :--- |
+| `name` | 展覽名稱 A | 展覽名稱 B |
+| `strt_dt` | 2025-10-01 | 2025-10-15 |
+| `end_dt` | 2025-10-31 | 2025-11-05 |
+| `loc` | 松山文創園區 | 製菸工廠北向一樓 |
+| `wrktime` | 10:00 - 18:00 | 14:00 - 20:00 |
+| `price` | 免費入場 | NT$ 300 |
+| `note` | 無資訊 | 請提早預約 |
+| `pageurl` | https://www.songshanculturalpark.org/... | https://www.songshanculturalpark.org/... |
+
+### 檔案內容範例 (`exhibition_info_YYYY_MM_DD.csv`)
+
+以下是 CSV 檔案的內容範例：
+
+```csv
+name,strt_dt,end_dt,loc,wrktime,price,note,pageurl
+展覽名稱 A,2025-10-01,2025-10-31,松山文創園區,10:00 - 18:00,免費入場,無資訊,[https://www.songshanculturalpark.org/](https://www.songshanculturalpark.org/)...
+展覽名稱 B,2025-10-15,2025-11-05,製菸工廠北向一樓,14:00 - 20:00,NT$ 300,請提早預約,[https://www.songshanculturalpark.org/](https://www.songshanculturalpark.org/)...
+... (更多活動資料) ...
 ```
 
 ## 注意事項
